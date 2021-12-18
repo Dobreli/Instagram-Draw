@@ -1,0 +1,65 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg fixed-top navbar-light main_navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand ms-3" href="{% url 'index' %}">
+            <img id='profile-pic' src={% static 'img/avatar.png' %} style="width:30px;height:30px;border-radius:50%" alt="profil pictures">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav ms-auto text-center">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-t" href="{% url 'index' %}">ANA SAYFA <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a {% if '/raffle/free-raffle/' in request.path %} class="nav-link nav-link-t nav-link-active" {% else %} class="nav-link nav-link-t" {% endif %} href="{% url 'freeraffle' %}">ÜCRETSİZ
+                        ÇEKİLİŞ</a>
+                </li>
+                <li class="nav-item">
+                    <a {% if '/raffle/instagram-raffle/' in request.path %} class="nav-link nav-link-t nav-link-active" {% else %} class="nav-link nav-link-t" {% endif %} href="{% url 'instagramraffle' %}">İNSTAGRAM
+                        ÇEKİLİŞ</a>
+                </li>
+                <li class="nav-item">
+                    <a {% if '/raffle/reference/' in request.path %} class="nav-link nav-link-t nav-link-active" {% else %} class="nav-link nav-link-t" {% endif %} href="{% url 'reference' %}">REFERANSLAR</a>
+                </li>
+                <li class="nav-item">
+                    <a {% if '/members/members/' in request.path %} class="nav-link nav-link-t nav-link-active" {% else %} class="nav-link nav-link-t" {% endif %} href="{% url 'members' %}">PAKETLER</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center ms-3">
+
+                <li class="nav-item">
+                    <a id="dark-mode" class="btn nav-link nav-link-t">
+
+                    </a>
+                </li>
+
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle nav-link-t " href="{% url 'profile' user.username %}" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{user.username}}</a>
+                    <ul class="dropdown-menu  dropdown-menu-end userdropdown" aria-labelledby="navbarUserDropdown">
+                        <li><a class="dropdown-item" href="{% url 'profile' user.username  %}">Profil</a></li>
+                        <li><a class="dropdown-item" href="{% url 'userraffle' user.username %}">Çekilişlerim</a></li>
+                        <li><a class="dropdown-item" href="{% url 'usermembers' user.username %}">Kalan Paketlerim</a></li>
+                        <li><a class="dropdown-item" href="{% url 'userbuy' user.username %}">Ödemelerim</a></li>
+                        <li><a class="dropdown-item" href="javascript:{document.getElementById('logout').submit()}">Çıkış</a>
+                        </li>
+                        <form action="{% url 'logout' %}" method="POST" id="logout">
+                            {% csrf_token %}
+                            <input type="hidden">
+                        </form>
+                    </ul>
+                </li>
+                {% else %}
+
+                <li class="nav-item">
+                    <a {% if 'login' in request.path %} class="nav-link nav-btn nav-btn-active" {% else %} class="nav-link nav-btn" {% endif %} href="{% url 'login' %}">Login</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,238 @@
+/* User Pages*/
+
+.usermain-pages {
+    background-color: #e2db78;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.usercardmain {
+    margin-right: 25px;
+    margin-left: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    padding-bottom: 25px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.3);
+    background-color: #dadada;
+    display: block;
+}
+
+.card-main {
+    max-width: 16rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-table-main {
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Footer */
+
+.footer-main-in {
+    padding-top: 50px;
+    padding-bottom: 25px;
+    margin-right: 25px;
+    margin-left: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.3);
+    background-color: #dadada;
+}
+
+.footer-title {
+    color: #000000;
+}
+
+.footer-navlink {
+    color: rgb(99, 99, 99) !important;
+}
+
+.footer-navlink:hover {
+    color: #000000 !important;
+}
+
+
+/* 
+    İnput
+
+*/
+
+.input-group {
+    padding-top: 25px !important;
+}
+
+.form-control {
+    border-radius: 10px !important;
+    box-shadow: 0 0 5px #000000 !important;
+}
+
+.form-control:focus {
+    transform: scale(1.01) !important;
+    outline: none !important;
+    border: 2px solid #e2e183;
+    box-shadow: 0 0 10px #e2e183 !important;
+}
+
+.hr {
+    color: #e2db78;
+    height: 5px !important;
+}
+
+.link-href {
+    width: 30px;
+    color: #405DE6;
+}
+
+.link-href:hover {
+    width: 30px;
+    color: #F56040;
+}
+
+
+/*
+                   BUTTONS
+ */
+
+.userget-btn {
+    color: rgb(80, 80, 80);
+    border: 3px solid #17a2b8 !important;
+    border-radius: 20px !important;
+    text-align: center;
+    font-size: 16px;
+}
+
+.userget-btn:hover {
+    transform: scale(1.02);
+    color: rgb(255, 255, 255) !important;
+    background-color: #1696aa !important;
+}
+
+.userdanger-btn {
+    color: rgb(80, 80, 80) !important;
+    border: 3px solid #e27878 !important;
+    border-radius: 20px !important;
+    text-align: center;
+    font-size: 16px;
+}
+
+.userdanger-btn:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: #e27878 !important;
+}
+
+.usersubmit-btn {
+    color: rgb(80, 80, 80);
+    border: 3px solid #e2db78;
+    border-radius: 20px !important;
+    text-align: center;
+    font-size: 16px;
+}
+
+.usersubmit-btn:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: #e2db78 !important;
+}
+
+.usersuccess-btn {
+    color: rgb(80, 80, 80);
+    border: 3px solid #7ce278;
+    border-radius: 20px !important;
+    text-align: center;
+    font-size: 16px;
+}
+
+.usersuccess-btn:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: #7ce278 !important;
+}
+
+.userraffle-btn {
+    color: rgb(255, 255, 255);
+    background-color: #405DE6;
+    border-radius: 20px !important;
+    text-align: center;
+    font-size: 16px;
+}
+
+.userraffle-btn:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: #F56040 !important;
+}
+
+
+/*
+             NAVBAR
+*/
+
+.usermain-navbar {
+    background-color: rgb(255, 255, 255);
+}
+
+.usermainnavbar {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.nav-title {
+    color: white;
+}
+
+.navlink-h {
+    color: rgb(99, 99, 99) !important;
+    font-size: x-large;
+}
+
+.navlink-h:hover {
+    color: #e2db78 !important;
+}
+
+.navlink-activate {
+    color: #e2db78 !important;
+}
+
+@media only screen and (max-width: 550px) and (min-width:370px) {
+    .card-main {
+        width: 9rem !important;
+    }
+    .card-text {
+        font-size: 12px !important;
+    }
+    .link-href {
+        width: 24px;
+    }
+    .btn {
+        font-size: 12px !important;
+    }
+    .card-result {
+        width: 200px !important;
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .usercardmain {
+        margin-right: 5px;
+        margin-left: 5px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .footer-main-in {
+        margin-right: 5px;
+        margin-left: 5px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 728px) {
+    #usernavbar {
+        position: fixed !important;
+        width: 100%;
+        top: 0px !important;
+    }
+    .usercardmain {
+        margin-top: 175px !important;
+    }
+}

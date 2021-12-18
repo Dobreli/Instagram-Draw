@@ -1,0 +1,68 @@
+{% load static %}
+<nav id="usernavbar" class="usermainnavbar navbar navbar-expand-md navbar-light bg-light flex-md-column flex-row align-items-center py-2 text-center sticky-top" id="sidebar">
+    <div class="text-center p-3">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <h3>RANDOM</h3>
+        </a>
+        <a href="#" class="navbar-brand">
+            <h5 id="user_username">{{user.username}}</h5>
+           </a>
+
+    </div>
+    <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarUserLink" aria-controls="navbarUserLink" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarUserLink">
+
+        <ul class="navbar-nav flex-column w-100 justify-content-center">
+            <li class="nav-item">
+                    <a id="userdark-mode" class="btn nav-link navlink-h">
+                        
+                    </a>
+            </li>
+            <hr class="hr">
+
+            <li class="nav-item">
+                <a href="{% url 'profile' user.username %}" {% if 'profile' in request.path %}
+                class="nav-link navlink-h navlink-activate"
+                {% else %}
+                class="nav-link navlink-h"
+                {% endif %} >PROFİL</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'userraffle' user.username %}"{% if 'user-raffle' in request.path %}
+                class="nav-link navlink-h navlink-activate"
+                {% else %}
+                class="nav-link navlink-h"
+                {% endif %}>ÇEKİLİŞLERİM</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'usermembers' user.username %}" {% if 'user-members' in request.path %}
+                class="nav-link navlink-h navlink-activate"
+                {% else %}
+                class="nav-link navlink-h"
+                {% endif %}>PAKETLERİM</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'userbuy' user.username %}" {% if 'buy-processes' in request.path %}
+                class="nav-link navlink-h navlink-activate"
+                {% else %}
+                class="nav-link navlink-h"
+                {% endif %}>SATIN ALMA İŞLEMLERİM</a>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:{document.getElementById('logout').submit()}"  class="nav-link navlink-h">Çıkış</a>
+            </li>
+                <form action="{% url 'logout' %}" method="POST" id="logout">
+                    {% csrf_token %}
+                    <input type="hidden">
+                </form>   
+
+        </ul>
+
+    </div>
+   
+</nav>
+
+
+

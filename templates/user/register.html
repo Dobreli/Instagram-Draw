@@ -1,0 +1,116 @@
+{% extends "layout.html" %} {% load static %} {% block head %}
+<title>Register</title>
+{% endblock head %} {% block body %}
+
+<div class="main-in">
+    <div class="d-flex justify-content-center">
+        <form action="{% url 'register' %}" method="POST" onSubmit="return check()" id="register">
+            {% csrf_token %}
+            <div class="card-form">
+                <div class="card-header shadow text-dark text-center">
+                    <h5 class="card-title">REGİSTER</h5>
+                    <p class="card-text">Zaten üyemisin o halde <a href="{% url 'login' %}" class="card-link-t"> Giriş yap</a>
+                    </p>
+                </div>
+                <div class="card-body">
+                    {% if form %}
+                    <div class="form-group mb-3">
+                        <div class="pb-2">
+                            <label for="id_username" class="form-label">Username</label>
+                        </div>
+
+                        <div class="pb-2">
+                            <input type="text" id="id_username" value="{{form.username.value}}" autocomplete="off" name="username" placeholder="username" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <div class="pb-2">
+                            <label for="id_email" class="form-label">E mail:</label>
+                        </div>
+
+                        <div class="pb-2">
+                            <input type="email" name="email" id="id_email" value="{{form.email.value}}" placeholder="email" class="form-control" required>
+                        </div>
+                    </div>
+
+                    {% else %}
+
+                    <div class="form-group mb-3">
+                        <div class="pb-2">
+                            <label for="id_username" class="form-label">Username</label>
+                        </div>
+
+                        <div class="pb-2">
+                            <input type="text" id="id_username" autocomplete="off" name="username" placeholder="username" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <div class="pb-2">
+                            <label for="id_email" class="form-label">E mail:</label>
+                        </div>
+
+                        <div class="pb-2">
+                            <input type="email" name="email" id="id_email" placeholder="email" class="form-control" required>
+                        </div>
+                    </div>
+
+                    {% endif %}
+
+                    <div class="form-group mb-3">
+                        <div class="pb-2">
+                            <label for="id_password" class="form-label">Password</label>
+                        </div>
+
+                        <div class="pb-2">
+                            <input type="password" name="password" id="id_password" placeholder="password" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <div class="pb-2">
+                            <label for="id_repassword" class="form-label">RePassword</label>
+                        </div>
+
+                        <div class="pb-2">
+                            <input type="password" name="repassword" id="id_repassword" placeholder="repassword" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row pt-3">
+
+                        <div class="col-sm-8">
+                            <h5>Kullanıcı <a href="{% url 'registercontract' %}" target="_blank" rel="noopener noreferrer" class="card-link-t">Sözleşmesini</a> Okudum, Onaylıyorum.</h5>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="btn-group" role="group" aria-label="checkbox">
+                                <input type="checkbox" class="btn-check" name="accountcontact" id="id_accountcontact" autocomplete="off">
+                                <label class="btn btn-outline-info" for="id_accountcontact">✓</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label id="dmessage" style="visibility: hidden;">Lütfen Sözleşmeyi Okuduğunuzu
+                        Onaylayın.</label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group d-flex justify-content-center mb-3">
+                        <div class="d-grid gap-2 col-8 mx-auto">
+                            <button type="submit" class="btn submit-btn">Kayıt ol</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock body %} {% block script %}
+<script src="{% static 'script/profile/register.js' %}"></script>
+
+{% endblock script %}

@@ -1,0 +1,149 @@
+{% extends "userlayout.html" %} {% load humanize %}{% load static %} {% block body %}
+<div class="usercardmain">
+    <div class="container ">
+        <div class="row pt-3">
+            <div class="col-12 text-center py-5">
+                    <h3 class="page-title">PAKETLERİM</h3>
+            </div>
+            <div class="card-table-main">
+                <div class="table-responsive">
+
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th style="width: 50%;">PAKET</th>
+                                <th style="width: 50%;">KALAN KULLANIM</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in usermembers %}
+                            <tr>
+                                <th scope="row" class="text-center">{{user.name}}</th>
+                                <td style="width: 35%;">{{user.n}}</td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-row bd-highlight my-5 justify-content-center">
+        <div class="p-3 bd-highlight">
+            <h3 class="page-title">TEKLİFLER</h3>
+        </div>
+    </div>
+
+
+    <div class="d-flex flex-wrap bd-highlight d-sm-flex mb-3 justify-content-center">
+
+        {% for memb in members reversed%}
+    <div class="p-3 bd-highlight text-center">
+            <div class="card-main">
+                <div class="card-header pt-3">
+                    <h3 class="my-0 fw-normal main-title" id="member-name">{{memb.name}}</h3>
+                    <h3 class="my-0 fw-normal main-title">Paket</h3>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title price-card-title" style="color:#e2e183"><span id="member-price">{{memb.price}}</span> ₺<small class="fw-light">/adet</small></h3>
+                    <h5 class="buy-card-text pt-4">* {{memb.comentlimit}} adete kadar yorumu çeker</h5>
+                    <h5 class="buy-card-text pt-2">* Son kullanım tarihi yok!</h5>
+                    <h5 class="buy-card-text pt-2">* Çeklilişi takipçilerinle paylaşma kolaylığı sağlar</h5>
+                    <h5 class="buy-card-text pt-2">* Çekiliş sonrası aynı kullanıcılar ile sınırsız tekrar hakkı verir
+                    </h5>
+
+                </div>
+                <div class="card-footer mt-5">
+                    <a href="{% url 'buymembers' memb.offers_id %}" class="btn userget-btn"> Satın Al</a>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="container py-5">
+        <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+            <div class="p-3 bd-highlight">
+                <h3 class="page-title">PAKET DETAY</h3>
+            </div>
+        </div>
+        <div class="row card-form mt-5">
+
+            <div class="table-responsive">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;"></th>
+                            {% for memb in members %}
+                            <th style="width: 15%;">{{memb.name}}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="text-start">Yorum Limiti</th>
+                            {% for memb in members %}
+                            <td style="width: 15%;"> {{memb.comentlimit}}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Çekiliş Animasyon Kontrolü</th>
+                            {% for memb in members %}
+                            <td style="width: 15%;"><i class="fas fa-check"></i></td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Etiket Kontrolü</th>
+                            {% for memb in members %}
+                            <td style="width: 15%;"> {% if memb.tag == True %} <i class="fas fa-check"></i> {% else %}<i class="fas fa-times"></i>{% endif %} </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Yorum Kontrolü</th>
+                            {% for memb in members %}
+                            <td style="width: 15%;"> {% if memb.text == True %} <i class="fas fa-check"></i> {% else %}
+                                <i class="fas fa-times"></i>{% endif %}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Kullanıcı Tekrarı Kontrolü</th>
+                            {% for memb in members %}
+                            <td style="width: 15%;"> <i class="fas fa-check"></i>
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Çekiliş Tekrarı</th>
+                            {% for memb in members %}
+                            <td style="width: 15%;"> <i class="fas fa-check"></i>
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Takip Kontrolü</th>
+                            {% for memb in members %}
+                            <td style="width: 15%;">
+                                <i class="fas fa-times"></i>
+                            </td>
+                            {% endfor %}
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+     
+
+{% endblock body %} {% block script %}
+<script src={% static 'script/profile.js' %}></script>
+
+{% endblock script %}

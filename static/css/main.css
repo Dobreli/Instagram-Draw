@@ -1,0 +1,426 @@
+body {
+    margin: 0;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.colorsubmit {
+    color: #ccc66d !important;
+}
+
+.title-color {
+    color: rgb(29, 29, 29);
+}
+
+.text-color {
+    color: rgb(83, 83, 83);
+}
+
+.hr {
+    height: 5px !important;
+    color: #17a2b8;
+}
+
+.main-title {
+    color: rgb(29, 29, 29);
+}
+
+.main-text {
+    font-size: 16px;
+}
+
+.main-result-title {
+    color: rgb(29, 29, 29);
+}
+
+.modal {
+    color: rgb(50, 50, 50);
+}
+
+.modal-content {
+    background-color: rgb(255, 255, 255);
+}
+
+.main-top-bot {
+    margin-bottom: 250px;
+    margin-top: 225px;
+}
+
+@media only screen and (max-width: 1024) {
+    .main-top-bot {
+        margin-bottom: 160px !important;
+        margin-top: 140px !important;
+    }
+}
+
+@media only screen and (max-width: 550) {
+    .main-top-bot {
+        margin-bottom: 100px !important;
+        margin-top: 80px !important;
+    }
+}
+
+
+/* Section Card */
+
+.main {
+    background-color: #e2db78;
+    padding-top: 75px !important;
+    padding-bottom: 25px !important;
+}
+
+.main-in {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-right: 25px;
+    margin-left: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.3);
+    background-color: #dadada;
+    display: block;
+    min-height: 200px;
+}
+
+.card-form {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-result {
+    max-width: 15rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-buy {
+    width: 25rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Footer */
+
+.footer-main {
+    background-color: #e2db78;
+    padding-bottom: 25px !important;
+}
+
+.footer-main-in {
+    padding-top: 50px;
+    padding-bottom: 25px;
+    margin-right: 25px;
+    margin-left: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.3);
+    background-color: #dadada;
+}
+
+.footer-title {
+    color: #000000;
+}
+
+.footer-navlink {
+    color: rgb(99, 99, 99) !important;
+}
+
+.footer-navlink:hover {
+    color: #000000 !important;
+}
+
+
+/*
+    Reference
+*/
+
+.reference-card-result {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.3);
+}
+
+.reference-card-text {
+    font-size: 16px;
+}
+
+.reference-card-date {
+    font-size: 16px;
+    color: rgb(80, 80, 80);
+}
+
+@media only screen and (max-width: 550px) and (min-width:375px) {
+    .reference-card-result {
+        width: 9rem !important;
+    }
+    .reference-card-text {
+        font-size: 12px !important;
+    }
+    /*
+    .card-result {
+        width: 200px !important;
+        font-size: 12px;
+    }*/
+}
+
+@media only screen and (max-width: 1024px) {
+    .card-form {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .card-buy {
+        width: auto !important;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .main-in {
+        margin-right: 5px;
+        margin-left: 5px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .footer-main-in {
+        margin-right: 5px;
+        margin-left: 5px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+
+/* Register and Login */
+
+
+/* Forum */
+
+.input-group {
+    padding-top: 25px !important;
+}
+
+.form-control {
+    border-radius: 10px !important;
+    box-shadow: 0 0 5px #000000 !important;
+}
+
+.form-control:focus {
+    transform: scale(1.01) !important;
+    outline: none !important;
+    border: 2px solid #e2e183;
+    box-shadow: 0 0 10px #e2e183 !important;
+}
+
+.card-link-t {
+    color: rgb(92, 197, 223) !important;
+}
+
+.card-link-t:hover {
+    color: white !important;
+    background-color: rgb(223, 210, 92) !important;
+    border-radius: 10px;
+}
+
+
+/* Main  */
+
+.card-title {
+    font-size: 30px;
+}
+
+.card-text {
+    font-size: 16px;
+}
+
+.card-date {
+    font-size: 12px;
+    color: rgb(110, 110, 110);
+}
+
+.buy-card-title {
+    font-size: 25px;
+    color: #000000;
+}
+
+.buy-card-price {
+    font-size: 30px;
+    color: #e2e183;
+}
+
+.buy-card-text {
+    color: rgb(50, 50, 50);
+    font-size: 20px;
+}
+
+
+/* Raffle */
+
+
+/* Raffle Card */
+
+.raffle-card-title {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+}
+
+.raffle-card-text {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+
+.card-body-start {
+    height: 15% !important;
+}
+
+.card-body-center {
+    padding-top: 40%!important;
+}
+
+.card-body-end {
+    height: 10% !important;
+}
+
+.winner-card-bg {
+    width: 12rem !important;
+    height: 12rem !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 0 6px #e2e183 !important;
+    border: none;
+    background-color: #9b7cb800;
+    color: rgb(0, 0, 0) !important;
+}
+
+.backup-card-bg {
+    width: 12rem !important;
+    height: 12rem !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 0 6px #e2e183 !important;
+    border: none;
+    background-color: #9b7cb800;
+    color: rgb(0, 0, 0) !important;
+}
+
+.card-bg-after {
+    background-color: #e2e183 !important;
+    border: 6px solid #e7e7e7 !important;
+    box-shadow: 0 0 0 6px #e2e183 !important;
+}
+
+@media only screen and (max-width: 500px) {
+    .raffle-card-title {
+        font-size: 15px;
+    }
+    .raffle-card-text {
+        font-size: 11px;
+    }
+    .card-img-top {
+        width: 50px !important;
+        border-radius: 50% !important;
+        box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.3);
+    }
+    .winner-card-bg {
+        width: 8rem !important;
+        height: 8rem !important;
+    }
+    .backup-card-bg {
+        width: 8rem !important;
+        height: 8rem !important;
+    }
+    .number {
+        font-size: 8px;
+    }
+    .backnumber {
+        font-size: 8px;
+    }
+}
+
+
+/* İmage */
+
+.card-img-top {
+    width: 75px !important;
+    border-radius: 50% !important;
+    box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.3);
+}
+
+.card-img-top:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.4);
+}
+
+@media only screen and (max-width: 500px) {
+    .card-img-top {
+        width: 50px !important;
+    }
+}
+
+
+/* Link */
+
+.link-href {
+    color: #17a2b8 !important;
+    width: 28px !important;
+    height: 28px !important;
+}
+
+.link-href:hover {
+    color: rgb(95, 205, 95) !important;
+}
+
+@media only screen and (max-width: 500px) and (min-width:375px) {
+    .link-href {
+        width: 24px !important;
+        height: 16px !important;
+    }
+}
+
+
+/* Button */
+
+.get-btn {
+    color: rgb(0, 0, 0) !important;
+    border: 3px solid #17a2b8 !important;
+    border-radius: 20px !important;
+    text-align: center;
+    font-size: 16px;
+}
+
+.get-btn:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: #17a2b8 !important;
+}
+
+.get-btn-activate {
+    color: rgb(255, 255, 255) !important;
+    background-color: #17a2b8 !important;
+}
+
+.submit-btn {
+    color: rgb(80, 80, 80);
+    border: 3px solid rgb(223, 210, 92);
+    border-radius: 20px !important;
+    text-align: center;
+    font-size: 16px;
+}
+
+.submit-btn:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(223, 210, 92) !important;
+}
+
+.submit-btn-activate {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(223, 210, 92) !important;
+}
+
+.danger-btn {
+    color: rgb(80, 80, 80) !important;
+    border: 3px solid #e27878 !important;
+    border-radius: 20px !important;
+    text-align: center;
+    font-size: 16px;
+}
+
+.danger-btn:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: #e27878 !important;
+}

@@ -1,0 +1,293 @@
+{% extends "layout.html" %} {% load static %} {% block head %}
+<title>İnstagram Çekiliş</title>
+{% endblock head %} {% block body %}
+<div class="main-in">
+    {% if user.is_authenticated %}
+
+    <div class="d-flex justify-content-center">
+        <form id="raffleinstagram" class="raffle-form">
+            <div class="card-form" style="width:auto">
+                {% csrf_token %}
+                <div class="card-header shadow text-center pt-3 pb-3">
+                    <h3 class="card-title header">
+                        İnstangram Çekiliş
+                    </h3>
+                </div>
+                <div class="card-body">
+
+                    <div class="input-group row">
+                        <div class="col-12">
+                            <label for="id_title" class="form-label">
+                        <h5>Çekiliş Adı</h5>
+                    </label>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control" name="title" id="id_title" placeholder="Çekiliş Adı" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group row">
+                        <div class="col-12">
+                            <label for="id_username" class="form-label">
+                        <h5>İnstagram username</h5>
+                    </label>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control" name="username" id="id_username" placeholder="Username" required>
+                        </div>
+                        <div class="col-sm-12" role="alert">
+                            Not: Çekilişi gerçekleştirdiğiniz sayfanın 'username' bilgisini başında '@' işareti olmadan ekleyiniz!
+                        </div>
+                    </div>
+
+                    <div class="input-group row">
+                        <div class="col-12">
+                            <label for="id_posturl" class="form-label">
+                        <h5>Gönderi link</h5>
+                    </label>
+                        </div>
+                        <div class="col-12">
+                            <input type="url" class="form-control" name="posturl" id="id_posturl" placeholder="Gönderi link" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group row">
+
+                        <div class="col-12">
+                            <label for="id_members" class="form-label">
+                        <h5>Üyelik Pakedi Seçiniz</h5>
+                    </label>
+                        </div>
+                        <div class="col-12">
+                            <select class="form-control" name="members" id="id_members" required min="1">
+
+                                {% if not info %}
+                                <option>Bir Paket Seçin</option>
+                                {% for mem in member %}
+                                <option>{{mem.id}}-Paket : {{mem.name}}/ Yorum Sayısı:{{mem.comment}}</option>
+                                {% endfor %}
+
+                                {% else %}
+                                <option>{{info}}</option>
+                                {% endif %}
+
+
+                    </select>
+                        </div>
+
+                        {% if info %}
+                        <div class="col-12 alert pt-3 text-center" role="alert">
+                            <p class="card-text">Paket satın incelemek ya da satın almak için <a href={% url 'members' %}>TIKLA!</a> </p>
+                        </div>
+                        {% else %}
+
+                        <div class="col-12 pt-5 text-center">
+                            <p>Paket seçemedin mi? Yorum sayısını sorgula! <br><br> <button type="button" id="get-comments" class="btn get-btn">Yorum Sayısı Sorgula</button> </p>
+                        </div>
+
+                        {% endif %}
+
+                        <div id='spinner' class="col-12 text-center pt-1" role="alert">
+
+                            <div class="spinner-border text-info" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="card-text"> Veri alınıyor... </p>
+                        </div>
+                        <div class="container">
+                            <div id='total-comment' class="col-12 text-center alert alert-totalcomment pt-3">
+                                <p id="alert-total"></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="input-group row">
+                        <div class="col-12">
+                            <label for="id_tags" class="form-label">
+                        <h5>Kaç Kişi Etiketlesin </h5>
+                    </label>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <input type="number" min="0" class="form-control " id="id_tags" name='tags' placeholder="Etiket Sayısı: 0" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group row">
+                        <div class="col-12">
+                            <label for="id_followlist" class="form-label">
+                        <h5>Kimleri Takip Etsin </h5>
+                    </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" onkeypress="onFollowChange();" name="followlist" id="id_followlist" rows="5" placeholder="Takip listesi"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="input-group row">
+                        <div class="col-12">
+                            <label for="id_textlist" class="form-label">
+                        <h5>Yorum ne yazsın</h5>
+                    </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" onkeypress="onTextChange();" name="textlist" id="id_textlist" rows="5" placeholder="Yorum listesi"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="input-group row text-center">
+                        <div class="col-sm-8 pt-4">
+                            <h5>Her kullanıcı 1 defa mı sayılsın ? </h5>
+                        </div>
+
+                        <div class="col-sm-2 pt-4">
+                            <div class="btn-group" role="group" aria-label="checkbox">
+                                <input type="checkbox" class="btn-check" name="usercount" id="id_usercount" autocomplete="off">
+                                <label class="btn btn-outline-info" for="id_usercount">✓</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group row">
+                        <div class="col-12">
+                            <label for="id_winner" class="form-label">
+                        <h5> Kaç Kazanan Olsun</h5>
+                    </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="number" class="form-control" name='winner' id="id_winner" placeholder="Kazanan Sayısı: 1" min='1' required>
+                        </div>
+                    </div>
+
+                    <div class="input-group row">
+                        <div class="col-12">
+                            <label for="id_backup" class="form-label">
+                        <h5> Kaç Yedek Olsun</h5>
+                    </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="number" class="form-control" name='backup' id="id_backup" placeholder="Yedek Sayısı: 0" min='0' required>
+                        </div>
+                    </div>
+
+                    <div class="input-group row">
+                        <div class="col-12">
+                            <label for="id_animate" class="form-label">
+                        <h5> Animasyon Süresi (Saniye)</h5>
+                    </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="number" class="form-control" name='animate' id="id_animate" placeholder="Animasyon Süresi" min='1' required>
+                        </div>
+                        <div class="col-sm-12" role="alert">
+                            Not: Çekiliş sonucunda kazananların görüntülenmesindeki beklenen süre.
+                        </div>
+                    </div>
+
+                    <div class="row pt-5 pb-5">
+                        <div class="d-grid gap-2 col-8 mx-auto">
+                            <button type="submit" class="btn submit-btn">ÇEKİLİŞİ BAŞLAT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container main-top-bot">
+        <div class="load-container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div class="spinner-border text-warning" role="status" style="width: 100px;height: 100px; ">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <h3 id="load-container-text" class="main-text">Lütfen bekleyiniz... Verileriniz işleniyor</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="container main-top-bot">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h1 class="main-title">İnstagram çekilişi mi yapmak istiyorsun ?</h1>
+            </div>
+            <div class="col-sm-12 text-center pt-5">
+                <h2 class="main-title"> Hemen <a href="{% url 'register' %} " class="card-link-t"> üye ol </a>, ilk üyeliğinde sana özel <span style="color: brown;">'Stone'</span> paketin ile bizden bir çekiliş yap.</h2>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="container main-top-bot">
+        <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+            <div class="p-2 bd-highlight">
+                <h1 class="main-title">Neler Yapıldı ?</h1>
+            </div>
+            <br>
+        </div>
+        <div class="d-flex flex-wrap bd-highlight d-sm-flex mb-3 justify-content-center">
+            <div class="p-2 bd-highlight">
+                <div class="">
+                    <div class="card-body text-center">
+                        <h5 class="pt-2"><i class="fas fa-gifts colorsubmit" style="font-size: 50px"></i></h5>
+                        <h2 class="title-color pt-2">Toplam Çekiliş</h2>
+                        <h3 class="text-color pt-2">{{totalraffle}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 bd-highlight">
+                <div class="">
+                    <div class="card-body text-center">
+                        <h5 class="pt-2"><i class="fas fa-users colorsubmit" style="font-size: 50px;"></i></h5>
+                        <h2 class="title-color pt-2">Toplam Katılımcı</h2>
+                        <h3 class="text-color pt-2">{{totalcomment}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 bd-highlight">
+                <div class="">
+                    <div class="card-body text-center">
+                        <h5 class="pt-2"><i class="fas fa-trophy colorsubmit" style="font-size: 50px;"></i></h5>
+                        <h2 class="title-color pt-2">Toplam Kazanan</h2>
+                        <h3 class="text-color pt-2">{{totalwinner}}</h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="d-flex flex-row bd-highlight pb-5 pt-5 justify-content-center">
+        <div class="p-2 bd-highlight">
+            <h1 class="main-title text-center">En Son Yapılan Çekilişler</h1>
+        </div>
+        <br>
+    </div>
+    <div class="d-flex flex-wrap bd-highlight d-sm-flex pb-5 pt-5 justify-content-center">
+        {% for raff in raffle %}
+        <div class="p-3 bd-highlight">
+            <div class="reference-card-result" style="width: 15rem;">
+                <div class="card-body text-center">
+                    <a id="ref-href" target="_blank" href="{{raff.post_url}}">
+                        <img src={% static 'profilepic/' %}{{raff.id}}/{{raff.username}}.jpg class="card-img-top" alt="profil pictures"></a>
+                    <h5 class="reference-card-text card-username pt-2">{{raff.username}}</h5>
+                    <p class="reference-card-text card-post">Gönderi Link :
+                        <a class="reference-link-href" target="_blank" rel="noopener noreferrer" href="{{raff.post_url}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-instagram link-href" viewBox="0 0 16 16">
+                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                            </svg>
+                        </a>
+                    </p>
+                    <p class="reference-card-text card-validlist">Katılımcı : {{raff.mainlist}}</p>
+                    <p class="reference-card-text card-winner">Kazanan : {{raff.winner}}</p>
+                    <p class="reference-card-date card-date">{{raff.date|timesince}}</p>
+                    <a href="{% url 'instagramraffleresult' raff.id %}" class="btn get-btn">İncele</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div> {% endblock body %} {% block script %}
+<script src="{% static 'script/instagramraffle.js' %}"></script>
+
+{% endblock script %}

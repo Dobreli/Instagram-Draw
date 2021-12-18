@@ -1,0 +1,50 @@
+{% load static %}
+<footer class="footer-main-in">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-md-6 p-4 text-center">
+                <a href={% url 'index' %} class="nav-link">
+                    <img id='profile-pic' src={% static 'img/avatar.png' %} style="width:75px;height:75px;border-radius:50%" alt="profil pictures">
+                    <h3 class="text-white">Bİ'RANDOM</h3>
+                </a>
+            </div>
+
+            <div class="col-md-2 text-center">
+                <h5 class="footer-title">Paketler</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href={% url 'members' %} class="nav-link footer-navlink p-0">Gold</a></li>
+                    <li class="nav-item mb-2"><a href={% url 'members' %} class="nav-link footer-navlink p-0">Bronze</a></li>
+                    <li class="nav-item mb-2"><a href={% url 'members' %} class="nav-link footer-navlink p-0">Silver</a></li>
+                    <li class="nav-item mb-2"><a href={% url 'members' %} class="nav-link footer-navlink p-0">İron</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-2 text-center">
+                <h5 class="footer-title">Çekilişler</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href={% url 'instagramraffle' %} class="nav-link footer-navlink p-0 ">İnstagram</a></li>
+                    <li class="nav-item mb-2"><a href={% url 'freeraffle' %} class="nav-link footer-navlink p-0 ">Ücretsiz</a></li>
+                    <li class="nav-item mb-2"><a href={% url 'reference' %} class="nav-link footer-navlink p-0 ">Çekiliş Sorgulama</a></li>
+                    <li class="nav-item mb-2"><a href={% url 'reference' %} class="nav-link footer-navlink p-0 ">Referanslar</a></li>
+
+                </ul>
+            </div>
+
+            <div class="col-md-2 text-center">
+                <h5 class="footer-title">About</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href={% url 'index' %} class="nav-link footer-navlink p-0 ">Ana Sayfa</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link footer-navlink p-0 ">Üyelik Sözleşmesi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link footer-navlink p-0 ">Destek</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column align-items-center border-top">
+            <div class="p-2">
+                <p class="footer-title">© 2021 Random,Created by anonymous.</p>
+            </div>
+        </div>
+    </div>
+</footer>

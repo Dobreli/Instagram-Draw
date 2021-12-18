@@ -1,0 +1,85 @@
+ {% extends "userlayout.html" %} {% load static %} {% load humanize %} {% block body %}
+<div class="usercardmain">
+    <div class="container justify-content-center">
+        <div class="row text-center">
+            <div class="col-12 text-center my-5">
+                <h1 class="page-title">
+                    SİPARİŞLERİM
+                </h1>
+                <div class="table-responsive">
+
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th style="width: auto;">Sipariş no</th>
+                                <th style="width: auto;">Ürün</th>
+                                <th style="width: auto;">Ödeme Tipi</th>
+                                <th style="width: auto;">Fiyat</th>
+                                <th style="width: auto;">Sipariş Tarihi</th>
+                                <th style="width: auto;">Durum</th>
+                                <th style="width: auto;">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for list in payment reversed %}
+                            <tr>
+                                <td style="width: auto;">{{list.payno}}</td>
+                                <td style="width: auto;">{{list.member}}</td>
+                                <td style="width: auto;">{{list.paytype}}</td>
+                                <td style="width: auto;">{{list.price}}</td>
+                                <td style="width: auto;">{{list.date}}</td>
+                                <td style="width: auto;">
+                                    {% if list.status == True %} Ödeme alındı. {% else %} Ödeme alınmadı. {% endif %}</td>
+                                <td style="width: auto;">{{list.comment}}</td>
+
+                            </tr>
+
+                            {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+            </div>
+            <div class="col-12 text-center my-5">
+                <h1 class="page-title">
+                    HAVALE BİLDİRİMLERİM
+                </h1>
+                <div class="table-responsive">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th style="width: auto;">Sipariş no</th>
+                                <th style="width: auto;">Transfer no</th>
+                                <th style="width: auto;">Yatırılan Banka</th>
+                                <th style="width: auto;">Refarans no</th>
+                                <th style="width: auto;">Durum</th>
+                                <th style="width: auto;">İşlem</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for trans in transfer %}
+                            <tr>
+                                <td style="width: auto;">{{trans.paymentno}}</td>
+                                <td style="width: auto;">{{trans.transferno}}</td>
+                                <td style="width: auto;">{{trans.bank}}</td>
+                                <td style="width: auto;">{{trans.reference}}</td>
+                                <td style="width: auto;">
+                                    {% if trans.status == True %} Havale onaylandı. {% else %} Havale onaylanmadı. {% endif %}
+                                </td>
+                                <td style="width: auto;">{{trans.comment}}</td>
+                                <td style="width: auto;">{% if trans.check_status == True %}
+                                    <div class="btn usersubmit-btn">Eksik Tutar Bildirimi</div>{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% for trans in transfer %} {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

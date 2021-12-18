@@ -1,0 +1,172 @@
+{% extends "userlayout.html" %} {% load humanize %}{% load static %} {% block body %}
+<div class="usercardmain">
+    <div class="container justify-content-center">
+        <div class="row text-center">
+            <div class="col-12 text-center my-5">
+                <h1 class="page-title">
+                    Profil Bilgilerim
+                </h1>
+            </div>
+            <hr class="hr">
+            <div class="col-sm-6 col-xs-6  pt-3">
+                <h5 class="page-text">Username :</h5>
+            </div>
+            <div class="col-sm-6 col-xs-6  pt-3">
+                <h5 class="page-text username">{{user.username}}</h5>
+            </div>
+
+            <div class="col-sm-6 col-xs-6  pt-3">
+                <h5 class="page-text">Ad :</h5>
+            </div>
+            <div class="col-sm-6  col-xs-6  pt-3">
+                <input type="text" class="form-control" name="firstname" id="firstname" value="{{user.first_name}}" required>
+            </div>
+
+            <div class="col-sm-6 col-xs-6  pt-3">
+                <h5 class="page-text">Soy Ad :</h5>
+            </div>
+            <div class="col-sm-6 pt-3">
+                <input type="text" class="form-control" name="lastname" id="lastname" value="{{user.last_name}}" required>
+            </div>
+
+            <div class="col-sm-6 col-xs-6  pt-3">
+                <h5 class="page-text">E-mail :</h5>
+            </div>
+            <div class="col-sm-6 col-xs-6  py-3">
+                <h5 id="mainmail" class="page-text">{{user.email}}</h5>
+            </div>
+
+            <hr class="hr">
+
+            <div class="col-sm-12">
+                <div id="alert-profile" class="alert alert-dismissible fade show" role="alert">
+                    <p id="alert-profile-text"></p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div class="col-sm-4 text-center py-3">
+                <button class="btn usersubmit-btn" data-bs-toggle="modal" data-bs-target="#changemail-modal">Mail Değiştir</button>
+            </div>
+
+            <div class="col-sm-4 text-center py-3">
+                <button class="btn usersubmit-btn" data-bs-toggle="modal" data-bs-target="#changepassword">Şifre Değiştir</button>
+            </div>
+            {% csrf_token %}
+
+            <div class="col-sm-4 text-center py-3">
+                <button type="button" id="update-open" class="btn usersubmit-btn">Bilgilerimi Güncelle</button>
+            </div>
+
+        </div>
+        <div class="modal fade" id="changemail-modal" tabindex="-1" aria-labelledby="changemailLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changemailLabel">Mail Değiştir</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="form-change-mail" action="{% url 'changemail' user.username %}">
+                        <div class="modal-body">
+                            <div class="form-group pt-3">
+                                <div class="pb-2">
+                                    <label for="changemail" class="form-label page-text">Yeni mail adresinizi giriniz :</label>
+                                </div>
+                                <div class="pb-2">
+                                    <input type="email" class="form-control " id="changemail" name="changemail" required>
+                                </div>
+                            </div>
+                            <div class="form-group pt-3">
+                                <div class="pb-2">
+                                    <label for="checkpassword" class="form-label page-text">Şifrenizi giriniz :</label>
+                                </div>
+                                <div class="pb-2">
+                                    <input type="password" class="form-control " id="checkpassword" name="checkpassword" required>
+                                </div>
+                            </div>
+                            <div class="form-group pt-3">
+                                <div class="pb-2 alert alert-warning changemail-alert">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closemail" type="button" class="btn userdanger-btn" data-bs-dismiss="modal">İptal Et</button>
+                            <button id="changemailbtn" type="submit" class="btn usersubmit-btn">Mail Değiştir</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="modal fade" id="changepassword" tabindex="-1" aria-labelledby="changepasswordLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changepasswordLabel">Şifre Değiştir</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="form-change-password" action="{% url 'changepassword' user.username %}">
+                    <div class="modal-body">
+                            <div class="form-group pt-3">
+                                <div class="pb-2">
+                                    <label for="oldpassword" class="form-label page-text">Eski Şifrenizi giriniz :</label>
+                                </div>
+                                <div class="pb-2">
+                                    <input type="password" class="form-control " id="oldpassword" name="oldpassword" required>
+                                </div>
+                            </div>
+                            <div class="form-group pt-3">
+                                <div class="pb-2">
+                                    <label for="newpassword" class="form-label page-text">Yeni Şifrenizi giriniz :</label>
+                                </div>
+                                <div class="pb-2">
+                                    <input type="password" class="form-control" id="newpassword" minlength="8" name="newpassword" required>
+                                </div>
+                            </div>
+                            <div class="form-group pt-3">
+                                <div class="pb-2">
+                                    <label for="renewpassword" class="form-label page-text">Yeni Şifrenizi tekrar giriniz :</label>
+                                </div>
+                                <div class="pb-2">
+                                    <input type="password" class="form-control " id="renewpassword" minlength="8" name="renewpassword" required>
+                                </div>
+                            </div>
+                            <div class="form-group pt-3">
+                                <div class="alert alert-warning changepassword-alert">
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group pt-3">
+                                <div class="alert alert-info">
+                                    <p>Şifre Kuralları</p>
+                                    <p>1. En az 8 basamaklı olmalıdır.</p>
+                                    <p>2. En az 1 büyük 1 küçük harf içermelidir.</p>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="closepass" type="button" class="btn userdanger-btn" data-bs-dismiss="modal">İptal Et</button>
+                        <button type="submit" class="btn btn usersubmit-btn">Şifre Değiştir</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+{% endblock body %} {% block script %}
+<script src={% static 'script/profile/profile.js' %}></script>
+
+{% endblock script %}

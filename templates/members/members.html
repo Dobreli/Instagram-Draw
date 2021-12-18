@@ -1,0 +1,185 @@
+{% extends "layout.html" %}{% load static %} {% block head %}
+<title>Çekiliş Paketleri</title>
+{% endblock head %} {% block body %} {% if member %}
+
+
+<div class="main-in">
+    <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+        <div class="p-3 bd-highlight">
+            <h1 class="main-title">TEKLİFLER</h1>
+        </div>
+    </div>
+
+
+    <div class="d-flex flex-wrap bd-highlight d-sm-flex mb-3 justify-content-center">
+        {% for memb in member reversed%}
+        <div class="p-3 bd-highlight text-center">
+            <div class="card-result">
+                <div class="card-header pt-3">
+                    <h3 class="my-0 fw-normal main-title" id="member-name">{{memb.name}}</h3>
+                    <h3 class="my-0 fw-normal main-title">Paket</h3>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title price-card-title" style="color:#e2e183"><span id="member-price">{{memb.price}}</span> ₺<small class="fw-light">/adet</small></h3>
+                    <h5 class="buy-card-text pt-4">* {{memb.comentlimit}} adete kadar yorumu çeker</h5>
+                    <h5 class="buy-card-text pt-2">* Son kullanım tarihi yok!</h5>
+                    <h5 class="buy-card-text pt-2">* Çeklilişi takipçilerinle paylaşma kolaylığı sağlar</h5>
+                    <h5 class="buy-card-text pt-2">* Çekiliş sonrası aynı kullanıcılar ile sınırsız tekrar hakkı verir
+                    </h5>
+
+                </div>
+                <div class="card-footer mt-5">
+                    <a href="{% url 'buymembers' memb.offers_id %}" class="btn get-btn"> Satın Al</a>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="container main-top-bot  ">
+        <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+            <div class="p-3 bd-highlight">
+                <h1 class="main-title">PAKET DETAY</h1>
+            </div>
+        </div>
+        <div class="row card-form mt-5">
+
+            <div class="table-responsive">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;"></th>
+                            {% for memb in member %}
+                            <th style="width: 15%;">{{memb.name}}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="text-start">Yorum Limiti</th>
+                            {% for memb in member %}
+                            <td style="width: 15%;"> {{memb.comentlimit}}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Çekiliş Animasyon Kontrolü</th>
+                            {% for memb in member %}
+                            <td style="width: 15%;"><i class="fas fa-check"></i></td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Etiket Kontrolü</th>
+                            {% for memb in member %}
+                            <td style="width: 15%;"> {% if memb.tag == True %} <i class="fas fa-check"></i> {% else %}<i class="fas fa-times"></i>{% endif %} </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Yorum Kontrolü</th>
+                            {% for memb in member %}
+                            <td style="width: 15%;"> {% if memb.text == True %} <i class="fas fa-check"></i> {% else %}
+                                <i class="fas fa-times"></i>{% endif %}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Kullanıcı Tekrarı Kontrolü</th>
+                            {% for memb in member %}
+                            <td style="width: 15%;"> <i class="fas fa-check"></i>
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Çekiliş Tekrarı</th>
+                            {% for memb in member %}
+                            <td style="width: 15%;"> <i class="fas fa-check"></i>
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Takip Kontrolü</th>
+                            {% for memb in member %}
+                            <td style="width: 15%;">
+                                <i class="fas fa-times"></i>
+                            </td>
+                            {% endfor %}
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="container main-top-bot">
+        <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+            <div class="p-2 bd-highlight">
+                <h1 class="main-title">Neler Yapıldı ?</h1>
+            </div>
+            <br>
+        </div>
+        <div class="d-flex flex-wrap bd-highlight d-sm-flex mb-3 justify-content-center">
+            <div class="p-2 bd-highlight">
+                <div class="">
+                    <div class="card-body text-center">
+                        <h5 class="pt-2"><i class="fas fa-gifts colorsubmit" style="font-size: 50px"></i></h5>
+                        <h2 class="title-color pt-2">Toplam Çekiliş</h2>
+                        <h3 class="text-color pt-2">{{totalraffle}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 bd-highlight">
+                <div class="">
+                    <div class="card-body text-center">
+                        <h5 class="pt-2"><i class="fas fa-users colorsubmit" style="font-size: 50px;"></i></h5>
+                        <h2 class="title-color pt-2">Toplam Katılımcı</h2>
+                        <h3 class="text-color pt-2">{{totalcomment}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 bd-highlight">
+                <div class="">
+                    <div class="card-body text-center">
+                        <h5 class="pt-2"><i class="fas fa-trophy colorsubmit" style="font-size: 50px;"></i></h5>
+                        <h2 class="title-color pt-2">Toplam Kazanan</h2>
+                        <h3 class="text-color pt-2">{{totalwinner}}</h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="d-flex flex-row bd-highlight pb-5 pt-5 justify-content-center">
+        <div class="p-2 bd-highlight">
+            <h1 class="main-title text-center">En Son Yapılan Çekilişler</h1>
+        </div>
+        <br>
+    </div>
+    <div class="d-flex flex-wrap bd-highlight d-sm-flex pb-5 pt-5 justify-content-center">
+        {% for raff in raffle %}
+        <div class="p-3 bd-highlight">
+            <div class="reference-card-result" style="width: 15rem;">
+                <div class="card-body text-center">
+                    <a id="ref-href" target="_blank" href="{{raff.post_url}}">
+                        <img src={% static 'profilepic/' %}{{raff.id}}/{{raff.username}}.jpg class="card-img-top" alt="profil pictures"></a>
+                    <h5 class="reference-card-text card-username pt-2">{{raff.username}}</h5>
+                    <p class="reference-card-text card-post">Gönderi Link :
+                        <a class="reference-link-href" target="_blank" rel="noopener noreferrer" href="{{raff.post_url}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-instagram link-href" viewBox="0 0 16 16">
+                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                            </svg>
+                        </a>
+                    </p>
+                    <p class="reference-card-text card-validlist">Katılımcı : {{raff.mainlist}}</p>
+                    <p class="reference-card-text card-winner">Kazanan : {{raff.winner}}</p>
+                    <p class="reference-card-date card-date">{{raff.date|timesince}}</p>
+                    <a href="{% url 'instagramraffleresult' raff.id %}" class="btn get-btn">İncele</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% else %} {% endif %} {% endblock body %}

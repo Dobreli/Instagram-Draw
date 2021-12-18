@@ -1,0 +1,464 @@
+{% extends "layout.html" %}{% load static %} {% block head %}
+<title>Çekiliş Paketleri</title>
+{% endblock head %} {% block body %}
+<div class="main-in">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="main-title">Satın Alma İşlemi</h1>
+            </div>
+            <div class="col-sm-6 pt-5">
+                <div class="d-flex flex-column justify-content-center">
+                    <div class="p-2 bd-highlight">
+                        <div class="card-buy text-center p-3">
+                            <h3 class="buy-card-title"><i class="fas fa-shopping-basket"></i></h3>
+                        </div>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <div class="card-buy text-center">
+                            <div class="card-header">
+                                <h3 class="my-0 fw-normal buy-card-title" id="member-name">{{ name }}</h3>
+                                <h3 class="my-0 fw-normal buy-card-title">Paket</h3>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="buy-card-price"><span id="member-price">{{price}}</span> ₺<small class="fw-light">/adet</small></h3>
+                                <ul class="list-unstyled">
+                                    <li class="p-2 pt-5">
+                                        <h5 class="buy-card-text">* {{limit}} adete kadar yorumu çeker</h5>
+                                    </li>
+                                    <li class="p-2">
+                                        <h5 class="buy-card-text">* Son kullanım tarihi yok!</h5>
+                                    </li>
+                                    <li class="p-2">
+                                        <h5 class="buy-card-text">* Çeklilişi takipçilerinle paylaşma kolaylığı sağlar</h5>
+                                    </li>
+                                    <li class="p-2">
+                                        <h5 class="buy-card-text">* Çekiliş sonrası aynı kullanıcılar ile sınırsız tekrar hakkı verir </h5>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 pt-5">
+                <div class="d-flex flex-column bd-highlight justify-content-center">
+                    <div class="p-2 bd-highlight">
+                        <div class="text-center card-form p-3">
+                            <h3 class="buy-card-title"><i class="fas fa-cash-register"></i></h3>
+                        </div>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <div class="card-form p-3">
+                            <ul class="nav mb-3 justify-content-center">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link submit-btn  m-1" id="pills-credit" type="button">Kredi/Banka Kartı</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link submit-btn m-1" id="pills-send" type="button">Havale/Eft Ödeme</button>
+                                </li>
+                            </ul>
+                            <div class="" id="pills-credit-page">
+                                <div class="card-body">
+                                    <form id="payment-form-credit" action={% url 'buymembers' id %}>
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <div class="pb-2">
+                                                <label for="validuser" class="form-label">Kart Sahibinin Adı</label>
+                                            </div>
+                                            <div class="pb-2">
+                                                <input type="text" class="form-control " id="validuser" name="validuser" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="pb-2">
+                                                <label for="creditno" class="form-label">Kart Numarası</label>
+                                            </div>
+                                            <div class="pb-2">
+                                                <input autocomplete="off" type="text" class="form-control " id="creditno" name="creditno" minlength="12" maxlength="12" placeholder="**** **** **** ****" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="pb-2">
+                                                <label autocomplete="off" for="creditvalid" class="form-label">Son Kullanma Tarihi</label>
+                                            </div>
+                                            <div class="pb-2">
+                                                <input autocomplete="off" type="text" class="form-control " id="creditvalid" name="creditvalid" onkeydown="addslash()" minlength="5" maxlength="5" placeholder="AY/YIL" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="p-2">
+                                                <label for="creditcv" class="form-label ">CVV</label>
+                                            </div>
+                                            <div class="pb-2">
+                                                <input autocomplete="off" type="text" class="form-control " id="creditcv" name="creditcv" minlength="3" maxlength="4" placeholder="CVV" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row pt-3">
+
+                                            <div class="col-sm-8">
+                                                <h5>Mesafeli satış <a href="{% url 'registercontract' %}" data-bs-toggle="modal" data-bs-target="#salescontract" target="_blank" rel="noopener noreferrer" class="card-link-t">Sözleşmesini</a> okudum, onaylıyorum.</h5>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <div class="btn-group" role="group" aria-label="checkbox">
+                                                    <input class="form-check-input" name="buycontract" id="buycontract" autocomplete="off" type="checkbox" id="flexCheckDefault" style="font-size: 25px;">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 p-2">
+                                                <label id="credit-alert" class="alert alert-warning" style="display:none;">Mesafeli satış sözleşmesine onay vermediniz.</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="p-2 text-center">
+                                                <button type='submit' id="payment-credit" class="btn get-btn">Ödeme ({{ price }}) yap</button>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="" id="pills-send-page">
+                                <div class="card-body">
+                                    <form id="payment-form-transfer" action={% url 'buymembers' id %}>
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <div class="pb-2">
+                                                <label for="authuser" class="form-label main-title">Havale/Eft Yapılacak Bankayı seçiniz</label>
+                                            </div>
+                                            <div class="pb-2">
+                                                <select id="bank-select" onchange="selectBank()" class="form-control form-select">
+                                                    <option value="0" class="main-text">Banka Seçiniz</option>
+                                                    {% for ban in bank %}
+                                                        <option value={{ban.id}} class="main-text bank-option">{{ban.bank_name}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        {% for ban in bank %}
+                                        <div id="bank-no-{{ban.id}}" style="display:none;" class="form-group text-center pt-3 bank-info">
+                                            <div class="pb-1">
+                                                <h5 class="main-title">Banka Bilgileri</h5>
+                                                <br>
+                                                <h5 class="main-title">{{ban.bank_name}}</h5>
+                                            </div>
+                                            <div class="pb-2">
+                                                <h5 class="main-title">Alıcı Adı : <span> {{ban.name}} </span></a>
+                                                </h5>
+                                            </div>
+                                            <div class="pb-2">
+                                                <h5 class="main-title">IBAN : <span id="iban"> {{ban.iban_no}} </span></a>
+                                                </h5>
+                                            </div>
+                                            <div class="pb-2">
+                                                <a class="btn get-btn" id="ibancopy">Iban'ı kopyala</a>
+                                                <p class="alert-iban alert alert-info my-1">Iban kopyalandı.</p>
+                                            </div>
+
+                                            <div class="p-1">
+                                                <div class="alert alert-warning">
+                                                    <p style="font-size: 14px;">
+                                                        Not: Yatırılan tutar, ürün tutarı ile aynı olmalıdır aksi takdirde onay verilemeyecektir. <br> Mesai saatleri içinde gerçekleştirdiğiniz Havale/Eft, refarans numaranız ve yatırılan tutar hatalı değilse
+                                                        30 dakika içinde onaylanacaktır.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="form-group pt-3">
+                                            <div class="pb-2">
+                                                <label for="referenceno" class="form-label">Referans No <a id=""><i class="fas fa-question-circle"></i></a></label>
+                                            </div>
+                                            <div class="pb-2">
+                                                <input type="text" class="form-control " id="referenceno" name="referenceno" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row pt-3">
+
+                                            <div class="col-sm-8">
+                                                <h5>Mesafeli satış <a href="{% url 'registercontract' %}" data-bs-toggle="modal" data-bs-target="#salescontract" target="_blank" rel="noopener noreferrer" class="card-link-t">Sözleşmesini</a> okudum, onaylıyorum.</h5>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <div class="btn-group" role="group" aria-label="checkbox">
+                                                    <input class="form-check-input" autocomplete="off" name="transfercontract" id="transfercontract" autocomplete="off" type="checkbox" id="flexCheckDefault" style="font-size: 25px;">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 p-2">
+                                                <label id="transfer-alert" class="alert alert-warning" style="display:none;">Mesafeli satış sözleşmesine onay vermediniz.</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="p-2 text-center">
+                                                <button id="payment-transfer" type='button' class="btn get-btn payment-transfer">Havale/Eft(9,9tl) yap</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="paymentinfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="paymentinfolabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-title">ÖDEME SONUCU</h5>
+
+                    </div>
+                    <div class="modal-body text-title">
+                        <h5 class="p-2">ÖDEME BAŞARIYLA ALINDI.</h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col text-center" style="padding-top: 200px; padding-bottom: 200px;">
+            <img src="{% static 'img/mastercard.png' %}" alt="mastercard" style="width: 100px;">
+            <img src="{% static 'img/visacard.png' %}" alt="visa" style="width: 150px;">
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="salescontract" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="salescontractLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Mesafeli Satış Sözleşmesi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% include "partials/_buycontract.html" %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn danger-btn" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% if not user.is_authenticated %}
+<div class="modal fade" id="loginModal" aria-hidden="true" aria-labelledby="loginModalLabel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content card-form">
+            <div class="modal-body">
+                <form id="buylogin">
+                    {% csrf_token %}
+                    <div class="card-header shadow text-dark text-center">
+                        <h5 class="card-title">LOGİN</h5>
+                        <p class="card-text">Üye olmadın mı ? <a data-bs-target="#registerModal" data-bs-toggle="modal" data-bs-dismiss="modal" class="card-link-t"> Üye ol</a>
+                        </p>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group mb-3">
+                            <label for="login-username" class="form-label">Username</label>
+                            <input type="text" class="form-control" autofocus="autofocus" name="login-username" id="login-username" required>
+                        </div>
+
+                        <div class="form-group  mb-3">
+                            <div class="pb-2">
+                                <label for="login-password" class="form-label">Şifre</label>
+                            </div>
+
+                            <div class="pb-2">
+                                <input type="password" class="form-control " id="login-password" name="login-password" required>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group mb-3 login-alert">
+                            <div class="alert alert-warning" role="alert">
+                                Username ya da Parola bilgisi yanlış.
+                            </div>
+                        </div>
+
+                        <div class="form-group d-flex text-center mb-3">
+                            <a class="mx-5 card-link-t card-text" href="#">Şifremi hatırlamıyorum.</a>
+                        </div>
+
+
+                        <div class="form-group d-flex justify-content-center mb-3">
+                            <div class="d-grid gap-2 col-8 mx-auto">
+                                <button type="submit" id="login-btn" class="btn submit-btn">Login</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'members' %}" class="btn danger-btn">İptal Et</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="registerModal" aria-hidden="true" aria-labelledby="registerModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content card-form">
+            <div class="modal-body">
+                <form onSubmit="return check()" id="buyregister">
+                    {% csrf_token %}
+
+                    <div class="card-header shadow text-dark text-center">
+                        <h5 class="card-title">REGİSTER</h5>
+                        <p class="card-text">Zaten üyemisin o halde <a data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal" class="card-link-t"> Giriş yap</a>
+                        </p>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group mb-3">
+                            <div class="pb-2">
+                                <label for="id_username" class="form-label">Username</label>
+                            </div>
+
+                            <div class="pb-2">
+                                <input type="text" id="id_username" onfocusout="checkusername()" autocomplete="off" name="username" placeholder="username" class="form-control" required>
+                            </div>
+                            <div class="username-check">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <div class="pb-2">
+                                <label for="id_email" class="form-label">E mail:</label>
+                            </div>
+
+                            <div class="pb-2">
+                                <input type="email" name="email" id="id_email" placeholder="email" class="form-control" required>
+                            </div>
+                            <div class="pb-2">
+                                <div class="alert email-check" role="alert">
+
+                                </div>
+                            </div>
+                        </div>
+                        <small></small>
+
+                        <div class="form-group mb-3">
+                            <div class="pb-2">
+                                <label for="id_password" class="form-label">Password</label>
+                            </div>
+
+                            <div class="pb-2">
+                                <input type="password" name="password" id="id_password" placeholder="password" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <div class="pb-2">
+                                <label for="id_repassword" class="form-label">RePassword</label>
+                            </div>
+
+                            <div class="pb-2">
+                                <input type="password" name="repassword" id="id_repassword" placeholder="repassword" class="form-control" required>
+                            </div>
+                            <div class="pb-2 ">
+                                <div class="alert password-check" role="alert">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row pt-3">
+
+                            <div class="col-sm-8">
+                                <h5>Kullanıcı <a href="{% url 'registercontract' %}" target="_blank" rel="noopener noreferrer" class="card-link-t">Sözleşmesini</a> Okudum, Onaylıyorum.
+                                </h5>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="btn-group" role="group" aria-label="checkbox">
+                                    <input type="checkbox" class="btn-check" name="accountcontact" id="id_accountcontact" autocomplete="off">
+                                    <label class="btn btn-outline-info" for="id_accountcontact">✓</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label id="dmessage" style="visibility: hidden;">Lütfen Sözleşmeyi Okuduğunuzu
+                                        Onaylayın.</label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group d-flex justify-content-center mb-3">
+                            <div class="d-grid gap-2 col-8 mx-auto">
+                                <button type="submit" id="register-btn" class="btn submit-btn">Kayıt ol</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </form>
+
+            <div class="modal-footer">
+                <a href="{% url 'members' %}" class="btn danger-btn">İptal Et</a>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+</div>
+{% endblock body %} {% block script %}
+<script src="{% static 'script/buymember.js' %}"></script>
+<script>
+    $('#pills-credit-page').show()
+    $('#pills-send-page').hide()
+    $('#pills-credit').addClass('submit-btn-activate')
+    $('#pills-credit').click(function() {
+        $('#pills-credit-page').show()
+        $('#pills-send-page').hide()
+        $('#pills-credit').addClass('submit-btn-activate')
+        $('#pills-send').removeClass('submit-btn-activate')
+    })
+    $('#pills-send').click(function() {
+        $('#pills-credit-page').hide()
+        $('#pills-send-page').show()
+        $('#pills-credit').removeClass('submit-btn-activate')
+        $('#pills-send').addClass('submit-btn-activate')
+    })
+    $(document).on('click', '#ibancopy', function() {
+        var iban = document.createElement('TEXTAREA');
+        iban.value = selectiban;
+        document.body.appendChild(iban);
+        iban.select();
+        document.execCommand('copy');
+        iban.style.display = 'none';
+        $('.alert-iban').show();
+
+    })
+    var selectiban = ''
+    var bankinfo = document.querySelectorAll('.bank-option')
+    var iban = document.querySelectorAll('#iban')
+    const bankval = []
+    for (let i = 0; i < bankinfo.length; i++) {
+        let a = bankinfo[i].value
+        bankval.push(a)
+    }
+
+    function selectBank() {
+        var x = document.getElementById("bank-select").value;
+        if (x == 0) {
+            $('.alert-iban').hide()
+            for (let i = 0; i < bankval.length; i++) {
+                document.getElementById("bank-no-" + bankval[i]).style.display = "none";
+            }
+        }
+        for (let i = 0; i < bankval.length; i++) {
+            $('.alert-iban').hide()
+            if (x == bankval[i]) {
+                document.getElementById("bank-no-" + bankval[i]).style.display = "block";
+                selectiban = iban[i].innerHTML
+            } else {
+                document.getElementById("bank-no-" + bankval[i]).style.display = "none";
+            }
+        }
+        $('.alert-iban').hide()
+    }
+</script>
+
+{% endblock script %}

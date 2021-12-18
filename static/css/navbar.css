@@ -1,0 +1,41 @@
+.main_navbar {
+    background-color: rgb(255, 255, 255) !important;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.3);
+    min-height: 50px !important;
+}
+
+.nav-link-t {
+    color: rgb(99, 99, 99) !important;
+}
+
+.nav-link-t:hover {
+    color: rgb(223, 210, 92) !important;
+}
+
+.nav-link-active {
+    color: rgb(223, 210, 92) !important;
+}
+
+.nav-btn {
+    color: rgb(100, 100, 100);
+    border: 2px solid rgb(223, 210, 92);
+    border-radius: 20px !important;
+    text-align: center;
+    display: block;
+    font-size: 16px;
+}
+
+.nav-btn:hover {
+    color: rgb(0, 0, 0) !important;
+    background-color: rgb(223, 210, 92) !important;
+}
+
+.nav-btn-active {
+    color: rgb(0, 0, 0) !important;
+    background-color: rgb(223, 210, 92) !important;
+}
+
+.dropdown-item:hover {
+    background-color: rgb(223, 210, 92) !important;
+    color: white;
+}
