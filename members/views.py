@@ -44,7 +44,6 @@ def members(request):
     context = {
             'raffle':mainlist,
             'totalraffle':len(raffle),
-            'totalcomment':totalcomment,
             'totalwinner':totalwinner,
             'member':memberlist,
         }       

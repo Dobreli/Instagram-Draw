@@ -198,7 +198,6 @@ class FreeRaffle(View):
         context = {
             'raffle':mainlist,
             'totalraffle':len(raffle),
-            'totalcomment':totalcomment,
             'totalwinner':totalwinner,
         }
         return render(request, 'raffle/freeraffle.html',context=context)
@@ -276,7 +275,6 @@ class InstagramRaffle(View):
         context = {
                     'raffle': mainlist,
                     'totalraffle': len(raffle),
-                    'totalcomment': totalcomment,
                     'totalwinner': totalwinner,
                 }
         if request.user.is_authenticated:
@@ -287,7 +285,6 @@ class InstagramRaffle(View):
                 context = {
                     'raffle': mainlist,
                     'totalraffle': len(raffle),
-                    'totalcomment': totalcomment,
                     'totalwinner': totalwinner,
                     'info':info
                 }
@@ -296,7 +293,6 @@ class InstagramRaffle(View):
                 context = {
                         'raffle': mainlist,
                         'totalraffle': len(raffle),
-                        'totalcomment': totalcomment,
                         'totalwinner': totalwinner,
                         'member':member,
                 }
@@ -435,7 +431,7 @@ class InstagramRaffleResult(View):
 
 
 def reinstagramraffle(request):
-    from app.InstaDraw import DownloadProfilePicture
+    from app.InstaDraw import DownloadProfilePicture,FollowCheck
     if request.user.is_authenticated:
         if request.method == 'POST':
             if request.is_ajax():
@@ -446,6 +442,9 @@ def reinstagramraffle(request):
                 result = Result(winner=raffle.winner, mainlist=mainlist,backup=raffle.backup_winner,insta=True).result()
                 winner = result['winnerlist']
                 backup = result['backuplist']
+                if raffle.follow_list != '':
+                    winner = FollowCheck(raffle.follow_list,winner).followcheck()
+                    backup = FollowCheck(raffle.follow_list,backup).followcheck()
                 raffleresult.winner_list = winner
                 raffleresult.backup_list = backup
                 raffleresult.animate_status = True

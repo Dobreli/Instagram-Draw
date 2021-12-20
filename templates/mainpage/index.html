@@ -7,80 +7,77 @@
 
 
 <div class="main-in">
-    <div class="d-flex flex-wrap bd-highlight mb-3 justify-content-center result-card ">
-        <div class="container main-top-bot ">
-            <div class="row m-5 ">
-                <div class="col-sm-12 ">
-                    <div class="d-flex flex-column bd-highlight justify-content-center ">
-                        <div class="p-2 bd-highlight text-center ">
-                            <h1 class="main-title ">Çekilişe katıldım, sonuçları görmek istiyorum ?</h1>
-                        </div>
-                        <div class="p-2 bd-highlight text-center ">
-                            <a href="{% url 'reference' %} " class="btn submit-btn ">
-                                <h3>Çekiliş Sorgula</h3>
-                            </a>
-                        </div>
+    <div class="container main-top-bot ">
+        <div class="row m-5 ">
+            <div class="col-sm-12 ">
+                <div class="d-flex flex-column bd-highlight justify-content-center ">
+                    <div class="p-2 bd-highlight text-center ">
+                        <h1 class="main-title ">Çekilişe katıldım, sonuçları görmek istiyorum ?</h1>
+                    </div>
+                    <div class="p-2 bd-highlight text-center ">
+                        <a href="{% url 'reference' %} " class="btn submit-btn ">
+                            <h3>Çekiliş Sorgula</h3>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="container main-top-bot ">
-            <div class="d-flex flex-row bd-highlight mb-3 justify-content-center ">
-                <div class="p-2 bd-highlight ">
-                    <h1 class="main-title ">Neler Yapıldı ?</h1>
-                </div>
-                <br>
-            </div>
-            <div class="d-flex flex-wrap bd-highlight d-sm-flex mb-3 justify-content-center ">
-                <div class="p-2 bd-highlight ">
-                    <div class=" ">
-                        <div class="card-body text-center ">
-                            <h5 class="pt-2 "><i class="fas fa-gifts colorsubmit " style="font-size: 50px "></i></h5>
-                            <h2 class="title-color pt-2 ">Toplam Çekiliş</h2>
-                            <h3 class="text-color pt-2 ">{{totalraffle}}</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-2 bd-highlight ">
-                    <div class=" ">
-                        <div class="card-body text-center ">
-                            <h5 class="pt-2 "><i class="fas fa-users colorsubmit " style="font-size: 50px; "></i></h5>
-                            <h2 class="title-color pt-2 ">Toplam Katılımcı</h2>
-                            <h3 class="text-color pt-2 ">{{totalcomment}}</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-2 bd-highlight ">
-                    <div class=" ">
-                        <div class="card-body text-center ">
-                            <h5 class="pt-2 "><i class="fas fa-trophy colorsubmit " style="font-size: 50px; "></i></h5>
-                            <h2 class="title-color pt-2 ">Toplam Kazanan</h2>
-                            <h3 class="text-color pt-2 ">{{totalwinner}}</h3>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="d-flex flex-row bd-highlight pb-5 pt-5 justify-content-center ">
+    </div>
+    <div class="container main-top-bot ">
+        <div class="d-flex flex-row bd-highlight mb-3 justify-content-center ">
             <div class="p-2 bd-highlight ">
-                <h1 class="main-title text-center ">En Son Yapılan Çekilişler</h1>
+                <h1 class="main-title ">Neler Yapıldı ?</h1>
             </div>
             <br>
         </div>
-        <div class="d-flex flex-wrap bd-highlight d-sm-flex pb-5 pt-5 justify-content-center ">
-            {% for raff in raffle %}
-            <div class="p-3 bd-highlight ">
-                <div class="reference-card-result " style="width: 15rem; ">
+        <div class="d-flex flex-wrap bd-highlight d-sm-flex mb-3 justify-content-center ">
+            <div class="p-2 bd-highlight ">
+                <div class=" ">
                     <div class="card-body text-center ">
-                        <a id="ref-href " target="_blank " href="{{raff.post_url}} ">
-                            <img src={% static 'profilepic/' %}{{raff.id}}/{{raff.username}}.jpg class="card-img-top " alt="profil pictures "></a>
-                        <h5 class="reference-card-text card-username pt-2 ">{{raff.username}}</h5>
-                        <p class="reference-card-text card-post ">Gönderi Link :
-                            <a class="reference-link-href " target="_blank " rel="noopener noreferrer " href="{{raff.post_url}} ">
-                                <svg xmlns="http://www.w3.org/2000/svg " fill="currentColor " class="bi bi-instagram link-href " viewBox="0 0 16 16 ">
+                        <h5 class="pt-2 "><i class="fas fa-gifts colorsubmit " style="font-size: 50px "></i></h5>
+                        <h2 class="title-color pt-2 ">Toplam Çekiliş</h2>
+                        <h3 class="text-color pt-2 ">{{totalraffle}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 bd-highlight ">
+                <div class=" ">
+                    <div class="card-body text-center ">
+                        <h5 class="pt-2 "><i class="fas fa-users colorsubmit " style="font-size: 50px; "></i></h5>
+                        <h2 class="title-color pt-2 ">Toplam Katılımcı</h2>
+                        <h3 class="text-color pt-2 ">{{totalcomment}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 bd-highlight ">
+                <div class=" ">
+                    <div class="card-body text-center ">
+                        <h5 class="pt-2 "><i class="fas fa-trophy colorsubmit " style="font-size: 50px; "></i></h5>
+                        <h2 class="title-color pt-2 ">Toplam Kazanan</h2>
+                        <h3 class="text-color pt-2 ">{{totalwinner}}</h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="d-flex flex-row bd-highlight pb-5 pt-5 justify-content-center ">
+        <div class="p-2 bd-highlight ">
+            <h1 class="main-title text-center ">En Son Yapılan Çekilişler</h1>
+        </div>
+        <br>
+    </div>
+    <div class="d-flex flex-wrap bd-highlight d-sm-flex pb-5 pt-5 justify-content-center ">
+        {% for raff in raffle %}
+        <div class="p-3 bd-highlight ">
+            <div class="reference-card-result " style="width: 15rem; ">
+                <div class="card-body text-center ">
+                    <a id="ref-href " target="_blank " href="{{raff.post_url}} ">
+                        <img src={% static 'profilepic/' %}{{raff.id}}/{{raff.username}}.jpg class="card-img-top " alt="profil pictures "></a>
+                    <h5 class="reference-card-text card-username pt-2 ">{{raff.username}}</h5>
+                    <p class="reference-card-text card-post">
+                        <a class="reference-link-href " target="_blank " rel="noopener noreferrer " href="{{raff.post_url}} ">
+                            <svg xmlns="http://www.w3.org/2000/svg " fill="currentColor " class="bi bi-instagram link-href " viewBox="0 0 16 16 ">
                                 <path
                                     d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372
                     1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99
@@ -89,19 +86,27 @@
                     2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034
                     1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z " />
                             </svg>
-                            </a>
-                        </p>
-                        <p class="reference-card-text card-validlist ">Katılımcı : {{raff.mainlist}}</p>
-                        <p class="reference-card-text card-winner ">Kazanan : {{raff.winner}}</p>
-                        <p class="reference-card-date card-date ">{{raff.date|timesince}}</p>
-                        <a href="{% url 'instagramraffleresult' raff.id %} " class="btn get-btn ">İncele</a>
-                    </div>
+                        </a>
+                    </p>
+
+                    <p class="reference-card-text card-winner ">Kazanan : {{raff.winner}}</p>
+                    <p class="reference-card-date card-date ">{{raff.date|timesince}}</p>
+                    <a href="{% url 'instagramraffleresult' raff.id %} " class="btn get-btn">İncele</a>
                 </div>
             </div>
-            {% endfor %}
         </div>
-
+        {% endfor %}
 
     </div>
+    <div class="d-flex flex-wrap bd-highlight d-sm-flex pb-5 pt-5 justify-content-center ">
+        <div class="p-3 bd-highlight ">
+            <a href="{% url 'reference' %}" class="btn submit-btn">Daha Fazla Görüntüle</a>
+        </div>
+    </div>
+</div>
 
-    {% endblock body %} {% block script %} {% endblock script %}
+
+
+{% endblock body %} {% block script %} {% endblock script %}
+
+<p class="reference-card-text card-validlist ">Katılımcı : {{raff.mainlist}}</p>

@@ -35,7 +35,6 @@ def index(request):
     context = {
         'raffle':mainlist,
         'totalraffle':len(raffle),
-        'totalcomment':totalcomment,
         'totalwinner':totalwinner,
     }
     return render(request,'mainpage/index.html',context=context)
