@@ -37,8 +37,8 @@ $(document).ready(function() {
                                             <a id="ref-href-pic" target="_blank" href="">
                                                 <img src="" class="card-img-top query-img" alt="profil pictures" style="width: 75px !important;border-radius:50%"></a>
                                             <h5 class="card-text query-card-username pt-2"></h5>
-                                            <p class="card-text card-post">Gönderi Link :<a class="link-href query-href-post" target="_blank" rel="noopener noreferrer" href=""><i class="fas fa-external-link-alt"></i> </a></p>
-                                            
+                                            <p class="card-text card-post"><a class="link-href query-href-post" target="_blank" rel="noopener noreferrer" href=""><i class="fas fa-external-link-alt"></i> </a></p>
+                                        
                                             <p class="card-text query-card-winner">Kazanan : </p>
                                             <p class="card-text text-dark query-card-date text-secondary"></p>
                                             <a href="" class=" card-text btn query-btn get-btn">İncele</a>

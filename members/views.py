@@ -33,7 +33,7 @@ def members(request):
     
     for ge in getraffle:
         main = ConvertList(ge.main_user_list).convert()
-        mainlist.append({'id':ge.id,'username':ge.username,'post_url':ge.post_url,'mainlist':len(main),'winner':ge.winner,'date':ge.date})
+        mainlist.append({'id':ge.id,'username':ge.username,'post_url':ge.post_url,'winner':ge.winner,'date':ge.date})
     raffle = Raffle.objects.all()
     totalcomment = 0
     totalwinner = 0
@@ -44,6 +44,7 @@ def members(request):
     context = {
             'raffle':mainlist,
             'totalraffle':len(raffle),
+            'totalcomment':totalcomment,
             'totalwinner':totalwinner,
             'member':memberlist,
         }       

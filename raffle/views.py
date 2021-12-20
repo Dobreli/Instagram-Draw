@@ -187,7 +187,7 @@ class FreeRaffle(View):
     
         for ge in getraffle:
             main = ConvertList(ge.main_user_list).convert()
-            mainlist.append({'id':ge.id,'username':ge.username,'post_url':ge.post_url,'mainlist':len(main),'winner':ge.winner,'date':ge.date})
+            mainlist.append({'id':ge.id,'username':ge.username,'post_url':ge.post_url,'winner':ge.winner,'date':ge.date})
         raffle = Raffle.objects.all()
         totalcomment = 0
         totalwinner = 0
@@ -198,6 +198,7 @@ class FreeRaffle(View):
         context = {
             'raffle':mainlist,
             'totalraffle':len(raffle),
+            'totalcomment':totalcomment,
             'totalwinner':totalwinner,
         }
         return render(request, 'raffle/freeraffle.html',context=context)
@@ -264,7 +265,7 @@ class InstagramRaffle(View):
         for get in getraffle:
             main = ConvertList(get.main_user_list).convert()
             mainlist.append({'id': get.id, 'username': get.username, 'post_url': get.post_url,
-                            'mainlist': len(main), 'winner': get.winner, 'date': get.date})
+                             'winner': get.winner, 'date': get.date})
         raffle = Raffle.objects.all()
         totalcomment = 0
         totalwinner = 0
@@ -275,6 +276,7 @@ class InstagramRaffle(View):
         context = {
                     'raffle': mainlist,
                     'totalraffle': len(raffle),
+                    'totalcomment': totalcomment,
                     'totalwinner': totalwinner,
                 }
         if request.user.is_authenticated:
@@ -285,6 +287,7 @@ class InstagramRaffle(View):
                 context = {
                     'raffle': mainlist,
                     'totalraffle': len(raffle),
+                    'totalcomment': totalcomment,
                     'totalwinner': totalwinner,
                     'info':info
                 }
@@ -293,6 +296,7 @@ class InstagramRaffle(View):
                 context = {
                         'raffle': mainlist,
                         'totalraffle': len(raffle),
+                        'totalcomment': totalcomment,
                         'totalwinner': totalwinner,
                         'member':member,
                 }
@@ -470,7 +474,7 @@ def reference(request):
 
     for get in getraffle:
         main = ConvertList(get.main_user_list).convert()
-        mainlist.append({'id': get.id,'username':get.username,'post_url':get.post_url,'mainlist':len(main),'winner':get.winner,'date':get.date})
+        mainlist.append({'id': get.id,'username':get.username,'post_url':get.post_url,'winner':get.winner,'date':get.date})
 
     context = {
         'raffle': mainlist,
@@ -489,7 +493,7 @@ class RaffleQuery(View):
             if str(raffle) !='<QuerySet []>':
                 for get in raffle:
                     main = ConvertList(get.main_user_list).convert()
-                    mainlist.append({'id': get.id,'username':get.username,'post_url':get.post_url,'mainlist':len(main),'winner':get.winner,'date':naturaltime(get.date),'rafflestatus':get.status,'status':True})
+                    mainlist.append({'id': get.id,'username':get.username,'post_url':get.post_url,'winner':get.winner,'date':naturaltime(get.date),'rafflestatus':get.status,'status':True})
                 return JsonResponse(mainlist[0], status=200)
             else:
                 mainlist.append({'status': False})

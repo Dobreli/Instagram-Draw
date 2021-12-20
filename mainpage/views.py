@@ -24,7 +24,7 @@ def index(request):
     
     for get in getraffle:
         main = ConvertList(get.main_user_list).convert()
-        mainlist.append({'id':get.id,'username':get.username,'post_url':get.post_url,'mainlist':len(main),'winner':get.winner,'date':get.date})
+        mainlist.append({'id':get.id,'username':get.username,'post_url':get.post_url,'winner':get.winner,'date':get.date})
     raffle = Raffle.objects.all()
     totalcomment = 0
     totalwinner = 0
@@ -35,6 +35,7 @@ def index(request):
     context = {
         'raffle':mainlist,
         'totalraffle':len(raffle),
+        'totalcomment':totalcomment,
         'totalwinner':totalwinner,
     }
     return render(request,'mainpage/index.html',context=context)
