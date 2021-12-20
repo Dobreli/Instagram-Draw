@@ -137,7 +137,7 @@ $(document).ready(function() {
                                     <a id="more-userraffle-href" target="_blank" href="">
                                         <img id="more-card-img" src="" class="card-img-top" alt="profil pictures" style="width: 75px !important;border-radius:50%"></a>
                                     <h5 class="card-text more-card-username pt-2"></h5>
-                                    <p class="card-text more-card-post">Gönderi Link :
+                                    <p class="card-text more-card-post">
                                         <a id="more-link-href" class="link-href" target="_blank" rel="noopener noreferrer" href="">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-instagram link-href" viewBox="0 0 16 16">
                                                 <path
@@ -185,10 +185,10 @@ $(document).ready(function() {
                             validlist[a].innerHTML = 'Toplam Katılımcı : ' + mediadata[a - oldmorecardmain]['mainlist']
                             winner[a].innerHTML = 'Kazanan : ' + mediadata[a - oldmorecardmain]['winner']
                             if (mediadata[a - oldmorecardmain]['status'] == true) {
-                                status[a].innerHTML = 'Durum : YAYINDA'
+                                status[a].innerHTML = 'YAYINDA'
                                 moresubmitbtn[a].innerHTML = 'Yayınlama'
                             } else {
-                                status[a].innerHTML = 'Durum : YAYINLANMIYOR'
+                                status[a].innerHTML = 'YAYINLANMIYOR'
                                 moresubmitbtn[a].innerHTML = 'Yayınla'
                             }
                             date[a].innerHTML = mediadata[a - oldmorecardmain]['date']
@@ -205,10 +205,10 @@ $(document).ready(function() {
                             validlist[a].innerHTML = 'Toplam Katılımcı : ' + mediadata[a]['mainlist']
                             winner[a].innerHTML = 'Kazanan : ' + mediadata[a]['winner']
                             if (mediadata[a]['status'] == true) {
-                                status[a].innerHTML = 'Durum : YAYINDA'
+                                status[a].innerHTML = 'YAYINDA'
                                 moresubmitbtn[a].innerHTML = 'Yayınlama'
                             } else {
-                                status[a].innerHTML = 'Durum : YAYINLANMIYOR'
+                                status[a].innerHTML = 'YAYINLANMIYOR'
                                 moresubmitbtn[a].innerHTML = 'Yayınla'
                             }
                             date[a].innerHTML = mediadata[a]['date']

@@ -20,7 +20,7 @@
                     <a id="userraffle-href" target="_blank" href="{{raff.post_url}}">
                         <img src={% static 'profilepic/' %}/{{raff.id}}/{{raff.username}}.jpg class="card-img-top" alt="profil pictures" style="width: 75px !important;border-radius:50%"></a>
                     <h5 class="card-text card-username pt-2">{{raff.username}}</h5>
-                    <p class="card-text card-post">Gönderi Link :
+                    <p class="card-text card-post">
                         <a class="link-href" target="_blank" rel="noopener noreferrer" href="{{raff.post_url}}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-instagram link-href" viewBox="0 0 16 16">
                                         <path
@@ -31,7 +31,7 @@
                     <p class="card-text card-number">{{raff.id}}</p>
                     <p class="card-text card-validlist">Toplam Katılımcı : {{raff.mainlist}}</p>
                     <p class="card-text card-winner">Kazanan : {{raff.winner}}</p>
-                    <p class="card-text card-status">Durum : {% if raff.durum == True %}YAYINDA{% else %}YAYINLANMIYOR{% endif %}</p>
+                    <p class="card-text card-status">{% if raff.durum == True %}YAYINDA{% else %}YAYINLANMIYOR{% endif %}</p>
                     <p class="card-text card-date text-secondary">{{raff.date|timesince}}</p>
                     <a href="{% url 'instagramraffleresult' raff.id %}" class="btn userget-btn">İncele</a>
                     <br>
