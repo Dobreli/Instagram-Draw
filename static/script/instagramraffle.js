@@ -24,6 +24,7 @@ $(document).ready(function() {
     $("#total-comment").hide()
     $(".load-container").hide()
     $("#spinner").hide()
+    $('#user-comment').hide()
     csrf = $("input[name=csrfmiddlewaretoken]").val();
     $(".get-btn").click(function(event) {
         event.preventDefault()
@@ -79,18 +80,24 @@ $(document).ready(function() {
         tag = $('#id_tags').val()
         follow = $('#id_followlist').val()
         text = $('#id_textlist').val()
-        useracount = $('#id_usercount:checked').val()
+        useracount = $('#id_usercount').val()
         backup = $('#id_backup').val()
         console.log(backup)
         winner = $('#id_winner').val()
         animate = $('#id_animate').val()
 
-        if (member == 'Bir Paket Seçin') {
+        if (document.getElementById("id_members").selectedIndex == 0) {
             $('#total-comment').show()
             $('#alert-total').text('Lütfen paket seçiniz...!')
             $('#total-comment').addClass('alert-danger')
             document.querySelector('#id_username').scrollIntoView({ behavior: 'smooth' })
+        } else if (document.getElementById("id_usercount").selectedIndex == 0) {
+            $('#user-comment').show()
+            $('#alert-usercount').text('Lütfen Kullanıcı tekrarının cevabını seçiniz...!')
+            $('#user-comment').addClass('alert-danger')
+            document.querySelector('#id_followlist').scrollIntoView({ behavior: 'smooth' })
         } else {
+
             $('.raffle-btn').prop('disabled', true)
             $('.load-container').show()
             $("html, body").animate({ scrollTop: 0 }, "slow");

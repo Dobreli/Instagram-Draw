@@ -311,7 +311,7 @@ class InstagramRaffle(View):
         self.tag = request.POST.get('tag')
         self.followlist = request.POST.get('follow')
         self.textlist = request.POST.get('text')
-        self.countuser = request.POST.get('useracount', default='off')
+        self.countuser = request.POST.get('useracount')
         self.backup = request.POST.get('backup')
         self.winner = request.POST.get('winner')
         self.animate = request.POST.get('animate')
@@ -320,7 +320,7 @@ class InstagramRaffle(View):
         self.membercomment = self.member.split(":")[2]
         self.current_user = request.user.id
 
-        if self.countuser == 'off':
+        if self.countuser == 'Hayır':
             self.countuser = False
         else:
             self.countuser = True
